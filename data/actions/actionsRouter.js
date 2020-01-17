@@ -60,25 +60,28 @@ router.delete('/:id', (req, res) => {
     
 })
 
-router.put('./:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const {project_id, notes, description} = req.body
-    const {changes} = req.body
+    const changes = req.body
 
     if (!project_id || !notes || !description) {
         res.status(400).json({errorMessage: "Please provide notes, description and project_id for the post."})
-    } 
-    Actions.update(req.params.id, changes)
-    .then(actions => {
-        if (action) {
-            res.status(201).json(actions)
-        } else {
-            res.status(404).json({message: "The post with the specified ID does not exist." })
-        }
-       
-    })
-    .catch(error => {
-        res.status(500).json({error:"The post information could not be modified."})
-    })
+    } else {
+        Actions.update(req.params.id, changes)
+        .then(actions => {
+            if (actions) {
+                res.status(201).json(actions)
+            } else {
+                res.status(404).json({message: "The post with the specified ID does not exist." })
+            }   
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({error:"The post information could not be modified."})
+            
+        })
+    }
+ 
 })
 
 

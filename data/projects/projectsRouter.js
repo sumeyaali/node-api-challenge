@@ -33,10 +33,10 @@ router.get('/:id',(req, res) => {
 
 router.post('/', (req, res) => {
 
-    const {notes, description} = req.body
+    const {name, description} = req.body
 
 
-    if (!notes, !description) {
+    if (!name, !description) {
         res.status(400).json({errorMessage: "Please provide notes and description for the post."})
     }
     Projects.insert(req.body)
@@ -61,20 +61,28 @@ router.delete('/:id', (req, res) => {
 })
 
 
-router.put('./:id', (req, res) => {
-    const {changes} = req.body
-    if (!notes, !description) {
+router.put('/:id', (req, res) => {
+    const {name, description} = req.body
+    const changes = req.body
+
+    if (!name || !description) {
         res.status(400).json({errorMessage: "Please provide notes, description and project_id for the post."})
-    } else if (!req.params.id) {
-        res.status(404).json({message: "The post with the specified ID does not exist." })
+    } else {
+        Projects.update(req.params.id, changes)
+        .then(projects => {
+            if (projects) {
+                res.status(201).json(projects)
+            } else {
+                res.status(404).json({message: "The post with the specified ID does not exist." })
+            }   
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({error:"The post information could not be modified."})
+            
+        })
     }
-    Projectss.update(req,params.id, changes)
-    .then(project => {
-        res.status(201).json({project})
-    })
-    .catch(error => {
-        res.status(500).json({error:"The post information could not be modified."})
-    })
+ 
 })
 
 
