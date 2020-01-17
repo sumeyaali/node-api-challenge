@@ -40,13 +40,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+    	- Express is a backend framework that sit on top of your node server and adds to functionality. With the main features of express like routing and middleware, its a lot easier to create applications. 
+
 - [ ] Describe Middleware?
+
+    - Middleware is basically a function that get the homies(req&res) operate on them and trigger an action as well. It handles the logic for you so you as a developer can use it in multiple places
 
 - [ ] Describe a Resource?
 
+    - Anything is a resource. The requests we make and the data we work with are a resource
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+    - The HTTP status code 201 lets you know your request was successful
+
 - [ ] How can we partition our application into sub-applications?
+
+    Express Routers are a way we can do this to better help us better maintain our application and not lose sight of what’s doing what.
+
 
 ## Minimum Viable Product
 
